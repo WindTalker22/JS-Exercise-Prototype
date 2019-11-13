@@ -40,10 +40,11 @@ Airplane.prototype.land = function () {
 */
 
 function Person(name, age) {
-  this.name = name;
-  this.age = age;
-  this.stomach = [];
+    this.name = name,
+    this.age = age,
+    this.stomach = []
 }
+
 Person.prototype.eat = function (eat) {
   if (this.stomach.length < 10) {
     this.stomach.push(eat);
@@ -51,6 +52,7 @@ Person.prototype.eat = function (eat) {
     return this.stomach;
   }
 }
+
 Person.prototype.poop = function (poop) {
   if (this.stomach.length = 0) {
     function empty(stomach) {
@@ -59,9 +61,13 @@ Person.prototype.poop = function (poop) {
   }
 }
 
-Person.prototype.toString = function(){
+Person.prototype.toString = function () {
   return `${this.name}, ${this.age}`;
 }
+
+
+
+
 
 /*
   TASK 2
@@ -83,13 +89,19 @@ function Car(model, milesPerGallon) {
   this.tank = 0;
   this.odometer = 0;
 }
-Car.prototype.fill = function(gallons){
+Car.prototype.fill = function (gallons) {
   this.tank = this.tank + gallons;
 
 }
-Car.prototype.drive = function(distance){
+Car.prototype.drive = function (distance) {
   this.odometer = this.odometer + distance;
-  this.tank = distance / this.milesPerGallon;
+  if (this.milesPerGallon * this.tank < distance) {
+    this.odometer = this.milesPerGallon * this.tank
+    this.tank = 0
+    return `I ran out of fuel at ${this.odometer} miles!`
+  } else {
+    this.tank = this.tank - distance / this.milesPerGallon
+  }
 }
 
 /*
@@ -99,19 +111,22 @@ Car.prototype.drive = function(distance){
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby(babyAttributes, favoriteToy) {
-  Person.call(this, babyAttributes);
-  this.isBaby = babyAttributes.isBaby;
-  this.name = this.name;
-  this.age = 5;
-  this.favoriteToy = 'trains';
+
+function Baby(name, age, favoriteToy) {
+  Person.call(this)
+  this.name = name;
+  this.age = age;
+  this.favoriteToy = favoriteToy;
 }
 
 Baby.prototype = Object.create(Person.prototype);
 
-Baby.prototype.play = function(){
+Baby.prototype.play = function () {
   return `Playing with ${this.favoriteToy}`;
 }
+
+
+
 
 /* 
   TASK 4
